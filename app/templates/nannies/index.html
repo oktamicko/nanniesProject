@@ -11,7 +11,7 @@
     {% block content %}
         <h1>Daftar Nannies</h1>
         <div class='text-right mt-4 mb-4'>
-            <a href='{{url_for('nannies.form')}}' class='btn btn-success'>Tambah Nanny Baru</a>
+            <a href='{{ url_for('nannies.form') }}' class='btn btn-success'>Tambah Nanny Baru</a>
         </div>
         <div class='row'>
             <div class='col-md-12'>
@@ -33,7 +33,7 @@
                     <tbody>
                         {% for nanny in nannies %}
                             <tr>
-                                <th scope='row'>{{ nanny.id}}</th>
+                                <th scope='row'>{{ nanny.id }}</th>
                                 <td>{{ nanny.name }}</td>
                                 <td>{{ nanny.email }}</td>
                                 <td>{{ nanny.phone_number }}</td>
@@ -41,15 +41,22 @@
                                 <td>{{ nanny.availability }}</td>
                                 <td>{{ nanny.address }}</td>
                                 <td>{{ nanny.age }}</td>
-                                <td> <a href='#' class='btn btn-primary'>Update</a></td>
-                                <td> <a href='#' class='btn btn-danger'>Delete</a></td>
+                                <td>
+                                    <!-- Ganti tombol form dengan tautan -->
+                                    <a href="{{ url_for('nannies.update_nanny', nanny_id=nanny.id) }}" class="btn btn-primary">Update</a>
+                                </td>
+                                <td>
+                                    <!-- Form Hapus Tetap Menggunakan Metode POST -->
+                                    <form action="{{ url_for('nannies.delete_nanny', nanny_id=nanny.id) }}" method="post">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
-        
     {% endblock %}
 </body>
 </html>

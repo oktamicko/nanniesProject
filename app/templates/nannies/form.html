@@ -9,45 +9,45 @@
 <body>
     {% extends 'base.html' %}
     {% block content %}
-        <h1>Form Input Data Nannies</h1>
-        <form action='#' method='post'>
+        <h1>{% if nanny %}Update Data Nanny{% else %}Form Input Data Nanny{% endif %}</h1>
+        <form action="{{ url_for('nannies.update_nanny', nanny_id=nanny.id) if nanny else url_for('nannies.form') }}" method='post'>
             <div class='form-group'>
                 <label for='name'>Nama:</label>
-                <input type='text' id='name' name='name' class='form-control' required>
+                <input type='text' id='name' name='name' class='form-control' value="{{ nanny.name if nanny else '' }}" required>
             </div>
             <div class='form-group'>
                 <label for='email'>Email:</label>
-                <input type='email' id='email' name='email' class='form-control' required>
+                <input type='email' id='email' name='email' class='form-control' value="{{ nanny.email if nanny else '' }}" required>
             </div>
             <div class='form-group'>
                 <label for='phone_number'>Nomor Telepon:</label>
-                <input type='tel' id='phone_number' name='phone_number' class='form-control' required>
+                <input type='tel' id='phone_number' name='phone_number' class='form-control' value="{{ nanny.phone_number if nanny else '' }}" required>
             </div>
             <div class='form-group'>
                 <label for='sex'>Jenis Kelamin:</label>
                 <select id='sex' name='sex' class='form-control' required>
-                    <option value="">Pilih Jenis Kelamin</option>
-                    <option value="Male">Laki-laki</option>
-                    <option value="Female">Perempuan</option>
+                    <option value="" {% if not nanny or nanny.sex == '' %}selected{% endif %}>Pilih Jenis Kelamin</option>
+                    <option value="Male" {% if nanny and nanny.sex == 'Male' %}selected{% endif %}>Laki-laki</option>
+                    <option value="Female" {% if nanny and nanny.sex == 'Female' %}selected{% endif %}>Perempuan</option>
                 </select>
             </div>
             <div class='form-group'>
                 <label for='availability'>Ketersediaan:</label>
                 <select id='availability' name='availability' class='form-control' required>
-                    <option value="">Pilih Ketersediaan</option>
-                    <option value="Available">Tersedia</option>
-                    <option value="Not Available">Tidak Tersedia</option>
+                    <option value="" {% if not nanny or nanny.availability == '' %}selected{% endif %}>Pilih Ketersediaan</option>
+                    <option value="Available" {% if nanny and nanny.availability == 'Available' %}selected{% endif %}>Tersedia</option>
+                    <option value="Not Available" {% if nanny and nanny.availability == 'Not Available' %}selected{% endif %}>Tidak Tersedia</option>
                 </select>
             </div>
             <div class='form-group'>
                 <label for='address'>Alamat:</label>
-                <textarea id='address' name='address' class='form-control' required></textarea>
+                <textarea id='address' name='address' class='form-control' required>{{ nanny.address if nanny else '' }}</textarea>
             </div>
             <div class='form-group'>
                 <label for='age'>Umur:</label>
-                <input type='number' id='age' name='age' class='form-control' required>
+                <input type='number' id='age' name='age' class='form-control' value="{{ nanny.age if nanny else '' }}" required>
             </div>
-            <button type='submit' class='btn btn-primary'>Simpan Data</button>
+            <button type='submit' class='btn btn-primary'>{% if nanny %}Update Data{% else %}Simpan Data{% endif %}</button>
         </form>
     {% endblock %}
 </body>
