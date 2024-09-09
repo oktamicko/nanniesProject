@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
+    <title>Daftar Nannies</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+        <h1>Daftar Nannies</h1>
+        <div class='text-right mt-4 mb-4'>
+            <a href='#' class='btn btn-success'>Tambah Nanny Baru</a>
+        </div>
+        <div class='row'>
+            <div class='col-md-12'>
+                <table class='table table-striped'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>#</th>
+                            <th scope='col'>Nama</th>
+                            <th scope='col'>Umur</th>
+                            <th scope='col'>Update</th>
+                            <th scope='col'>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for nanny in nannies %}
+                            <tr>
+                                <th scope='row'>{{ loop.index }}</th>
+                                <td>{{ nanny.name }}</td>
+                                <td>{{ nanny.age }}</td>
+                                <td> <a href='#' class='btn btn-primary'>Update</a></td>
+                                <td> <a href='#' class='btn btn-danger'>Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    {% endblock %}
+</body>
+</html>
