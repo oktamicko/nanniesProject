@@ -11,16 +11,21 @@
     {% block content %}
         <h1>Daftar Nannies</h1>
         <div class='text-right mt-4 mb-4'>
-            <a href='#' class='btn btn-success'>Tambah Nanny Baru</a>
+            <a href='{{url_for('nannies.form')}}' class='btn btn-success'>Tambah Nanny Baru</a>
         </div>
         <div class='row'>
             <div class='col-md-12'>
                 <table class='table table-striped'>
                     <thead>
                         <tr>
-                            <th scope='col'>#</th>
-                            <th scope='col'>Nama</th>
-                            <th scope='col'>Umur</th>
+                            <th scope='col'>id</th>
+                            <th scope='col'>Name</th>
+                            <th scope='col'>Email</th>
+                            <th scope='col'>Phone Number</th>
+                            <th scope='col'>Gender</th>
+                            <th scope='col'>Availibility</th>
+                            <th scope='col'>Address</th>
+                            <th scope='col'>Age</th>
                             <th scope='col'>Update</th>
                             <th scope='col'>Delete</th>
                         </tr>
@@ -28,8 +33,13 @@
                     <tbody>
                         {% for nanny in nannies %}
                             <tr>
-                                <th scope='row'>{{ loop.index }}</th>
+                                <th scope='row'>{{ nanny.id}}</th>
                                 <td>{{ nanny.name }}</td>
+                                <td>{{ nanny.email }}</td>
+                                <td>{{ nanny.phone_number }}</td>
+                                <td>{{ nanny.sex }}</td>
+                                <td>{{ nanny.availability }}</td>
+                                <td>{{ nanny.address }}</td>
                                 <td>{{ nanny.age }}</td>
                                 <td> <a href='#' class='btn btn-primary'>Update</a></td>
                                 <td> <a href='#' class='btn btn-danger'>Delete</a></td>

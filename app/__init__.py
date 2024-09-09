@@ -1,5 +1,6 @@
 from flask import Flask
 from config import Config
+from app.extensions import db
 
 
 def create_app(config_class=Config):
@@ -7,6 +8,7 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     # Initialize Flask Extension
+    db.init_app(app)
 
     # Register blueprints
     from app.main import bp as main_bp
