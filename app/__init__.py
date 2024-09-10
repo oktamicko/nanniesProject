@@ -1,6 +1,9 @@
 from flask import Flask
+from flask_migrate import Migrate
 from config import Config
 from app.extensions import db
+
+migrate = Migrate()
 
 
 def create_app(config_class=Config):
@@ -9,6 +12,7 @@ def create_app(config_class=Config):
 
     # Initialize Flask Extension
     db.init_app(app)
+    migrate.init_app(app, db)
 
     # Register blueprints
     from app.main import bp as main_bp

@@ -1,36 +1,42 @@
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
-    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
-    <title>Index Page</title>
-</head>
-<body>
-    {% extends 'base.html' %}
-    {% block content %}
-        <h1>Nannies Data</h1>
-        <table class='table'>
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>Master Table Nannies and Activities</h1>
+        <!-- Tombol untuk Menambah Data -->
+        <div class='text-right mt-4 mb-4'>
+            <a href="{{ url_for('main.add_or_update_nanny_activity') }}" class='btn btn-success'>Tambah Aktivitas Baru</a>
+        </div>
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope='col'>#</th>
-                    <th scope='col'>Name</th>
-                    <th scope='col'>Age</th>
+                    <th scope="col">Nanny Name</th>
+                    <th scope="col">Activity Name</th>
+                    <th scope="col">Age Group</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope='row'>1</th>
-                    <td>John Doe</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <th scope='row'>2</th>
-                    <td>Jane Smith</td>
-                    <td>25</td>
-                </tr>
+                {% for na in nannies_activities %}
+                    <tr>
+                        <td>{{ na.nanny.name }}</td>
+                        <td>{{ na.activity.activity_name }}</td>
+                        <td>{{ na.activity.age_group }}</td>
+                        <td>{{ na.activity.location }}</td>
+                        <td>{{ na.date }}</td>
+                        <td>
+                            <!-- Tombol Update -->
+                            <a href="{{ url_for('main.add_or_update_nanny_activity', id=na.id) }}" class="btn btn-warning btn-sm">Update</a>
+                            <!-- Tombol Delete -->
+                            <form action="{{ url_for('main.delete_nanny_activity', id=na.id) }}" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
-    {% endblock %}
-</body>
-</html>
+    </div>
+{% endblock %}
