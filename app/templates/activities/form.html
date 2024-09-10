@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
+    <title>Form Input Data Aktivitas</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+        <h1>Form Input Data Aktivitas</h1>
+
+        <!-- Form untuk Update Data Aktivitas -->
+        <form action="" method="post">
+            {% if activity %}
+                <input type='hidden' name='id' value="{{ activity.id }}">
+            {% endif %}
+
+            <div class='form-group'>
+                <label for='activity_name'>Nama Aktivitas:</label>
+                <input type='text' id='activity_name' name='activity_name' class='form-control' value="{{ activity.activity_name if activity else '' }}" required>
+            </div>
+
+            <div class='form-group'>
+                <label for='age_group'>Grup Umur:</label>
+                <input type='text' id='age_group' name='age_group' class='form-control' value="{{ activity.age_group if activity else '' }}" required>
+            </div>
+
+            <div class='form-group'>
+                <label for='location'>Lokasi:</label>
+                <input type='text' id='location' name='location' class='form-control' value="{{ activity.location if activity else '' }}" required>
+            </div>
+
+            <button type='submit' class='btn btn-primary'>Simpan Data</button>
+
+        </form>
+
+    {% endblock %}
+</body>
+</html>
