@@ -62,3 +62,8 @@ def delete_nanny_activity(id):
         db.session.rollback()
 
     return redirect(url_for("main.index"))
+
+
+@bp.route("/blog")
+def blog():
+    return render_template("blog.html")
