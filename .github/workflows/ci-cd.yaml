@@ -30,7 +30,7 @@ jobs:
         with:
           context: . # Pastikan ini adalah lokasi yang tepat dari source code kamu
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/dashboard-transaksi:latest # Ganti dengan Docker Hub username dan nama image
+          tags: ${{ secrets.DOCKER_USERNAME }}/nannies-project:latest # Ganti dengan Docker Hub username dan nama image
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,7 +45,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/dashboard-transaksi:latest
-            docker stop dashboard-transaksi || true
-            docker rm dashboard-transaksi || true
-            docker run -d --network="host" --name dashboard-transaksi ${{ secrets.DOCKER_USERNAME }}/dashboard-transaksi:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/nannies-project:latest
+            docker stop nannies-project || true
+            docker rm nannies-project || true
+            docker run -d --network="host" --name nannies-project ${{ secrets.DOCKER_USERNAME }}/nannies-project:latest
